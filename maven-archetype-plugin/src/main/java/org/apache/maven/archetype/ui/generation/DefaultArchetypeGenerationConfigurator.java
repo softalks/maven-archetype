@@ -181,6 +181,7 @@ public class DefaultArchetypeGenerationConfigurator
             context.put( Constants.GROUP_ID, ad.getGroupId() );
             context.put( Constants.ARTIFACT_ID, ad.getArtifactId() );
             context.put( Constants.VERSION, ad.getVersion() );
+            context.put( "model", "Hello, World" );
             while ( !confirmed )
             {
                 if ( archetypeConfiguration.isConfigured() )
