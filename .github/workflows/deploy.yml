@@ -2,7 +2,9 @@ name: Java CI
 on:
   push:
     paths:
-      - 'src/main/java/**.java' # - 'pom.xml' - '.github/workflows/build.yml'
+      - 'src/main/java/**.java'
+      - 'pom.xml'
+      - '.github/workflows/build.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
