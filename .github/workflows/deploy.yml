@@ -3,8 +3,8 @@ on:
   push:
     paths:
       - 'src/main/java/**.java'
-      - 'pom.xml'
-      - '.github/workflows/build.yml'
+      - '**/pom.xml'
+      - '.github/workflows/deploy.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
