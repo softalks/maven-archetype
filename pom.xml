@@ -66,11 +66,11 @@
   </ciManagement>
 
   <distributionManagement>
-    <repository>
+    <snapshotRepository>
       <id>upload</id>
       <name>softalks/maven-archetype (GitHub repository) Maven Packages</name>
       <url>https://maven.pkg.github.com/softalks/maven-archetype</url>
-    </repository>
+    </snapshotRepository>
     <site>
       <id>apache.website</id>
       <url>scm:svn:https://svn.apache.org/repos/asf/maven/website/components/${maven.site.path}</url>
