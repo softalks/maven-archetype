@@ -181,7 +181,13 @@ public class DefaultArchetypeGenerationConfigurator
             context.put( Constants.GROUP_ID, ad.getGroupId() );
             context.put( Constants.ARTIFACT_ID, ad.getArtifactId() );
             context.put( Constants.VERSION, ad.getVersion() );
-            context.put( "model", "Hello, World" );
+            System.out.println("User directory: " + System.getProperty("user.dir"))
+            File xml = new File("org.apache.maven-archetype-plugin.input.xml");
+            if (xml.exists()) {
+                XmlTool model = new XmlTool();
+                model = model.read(xml);
+                context.put("model", model);
+            }
             while ( !confirmed )
             {
                 if ( archetypeConfiguration.isConfigured() )
