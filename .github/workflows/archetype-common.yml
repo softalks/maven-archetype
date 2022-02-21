@@ -19,4 +19,6 @@ jobs:
           distribution: 'adopt'
           cache: maven
           server-id: upload
-      - run: mvn -X --batch-mode --update-snapshots deploy -Drat.ignoreErrors=true
+      - run: |
+          cd archetype-common
+          mvn --batch-mode deploy -Drat.ignoreErrors=true
