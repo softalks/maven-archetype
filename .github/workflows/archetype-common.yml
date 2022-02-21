@@ -1,0 +1,22 @@
+name: Java CI
+on:
+  push:
+    paths:
+      - 'archetype-common/src/main/java/**.java'
+      - 'archetype-common/pom.xml'
+      - '.github/workflows/deploy-archetype-common.yml'
+jobs:
+  permissions:
+    packages: write
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 8
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+          cache: maven
+          server-id: upload
+      - run: mvn -X --batch-mode --update-snapshots deploy -Drat.ignoreErrors=true
