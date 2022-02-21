@@ -19,8 +19,28 @@ package org.apache.maven.archetype.generator;
  * under the License.
  */
 
-import groovy.lang.Binding;
-import groovy.lang.GroovyShell;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
 import org.apache.maven.archetype.ArchetypeGenerationRequest;
 import org.apache.maven.archetype.common.ArchetypeArtifactManager;
 import org.apache.maven.archetype.common.ArchetypeFilesResolver;
@@ -41,6 +61,7 @@ import org.apache.maven.archetype.metadata.RequiredProperty;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.context.Context;
+import org.apache.velocity.tools.generic.XmlTool;
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.AbstractLogEnabled;
@@ -51,26 +72,27 @@ import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.codehaus.plexus.velocity.VelocityComponent;
 import org.xml.sax.SAXException;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+import groovy.lang.Binding;
+import groovy.lang.GroovyShell;
 
 @Component( role = FilesetArchetypeGenerator.class )
 public class DefaultFilesetArchetypeGenerator
@@ -416,6 +438,17 @@ public class DefaultFilesetArchetypeGenerator
     private Context prepareVelocityContext( ArchetypeGenerationRequest request )
     {
         Context context = new VelocityContext();
+        File xml = new File( "org.apache.maven-archetype-plugin.input.xml" );
+        if ( xml.exists( ) ) 
+        {
+            XmlTool model = new XmlTool();
+            model = model.read( xml );
+            context.put( "model", model );
+        }
+        else
+        {
+            context.put( "model", "Hello, World!" );
+        }
         context.put( Constants.GROUP_ID, request.getGroupId() );
         context.put( Constants.ARTIFACT_ID, request.getArtifactId() );
         context.put( Constants.VERSION, request.getVersion() );

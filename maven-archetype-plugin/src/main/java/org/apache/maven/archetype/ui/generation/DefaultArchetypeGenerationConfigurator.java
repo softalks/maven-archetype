@@ -44,14 +44,12 @@ import org.apache.velocity.runtime.parser.ParseException;
 import org.apache.velocity.runtime.parser.node.ASTReference;
 import org.apache.velocity.runtime.parser.node.SimpleNode;
 import org.apache.velocity.runtime.visitor.BaseVisitor;
-import org.apache.velocity.tools.generic.XmlTool;
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.components.interactivity.PrompterException;
 import org.codehaus.plexus.logging.AbstractLogEnabled;
 import org.codehaus.plexus.util.StringUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -183,17 +181,6 @@ public class DefaultArchetypeGenerationConfigurator
             context.put( Constants.GROUP_ID, ad.getGroupId() );
             context.put( Constants.ARTIFACT_ID, ad.getArtifactId() );
             context.put( Constants.VERSION, ad.getVersion() );
-            File xml = new File( "org.apache.maven-archetype-plugin.input.xml" );
-            if ( xml.exists( ) ) 
-            {
-                XmlTool model = new XmlTool();
-                model = model.read( xml );
-                context.put( "model", model );
-            }
-            else
-            {
-                context.put( "model", "Hello, World!" );
-            }
             while ( !confirmed )
             {
                 if ( archetypeConfiguration.isConfigured() )

@@ -169,7 +169,7 @@ public class CreateProjectFromArchetypeMojo
      */
     @Parameter( property = "filter" )
     private String filter;
-
+    
     @Override
     public void execute()
         throws MojoExecutionException, MojoFailureException
