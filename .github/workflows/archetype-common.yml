@@ -4,11 +4,11 @@ on:
     paths:
       - 'archetype-common/src/main/java/**.java'
       - 'archetype-common/pom.xml'
-      - '.github/workflows/deploy-archetype-common.yml'
+      - '.github/workflows/archetype-common.yml'
 jobs:
-  permissions:
-    packages: write
   build:
+    permissions:
+      packages: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
