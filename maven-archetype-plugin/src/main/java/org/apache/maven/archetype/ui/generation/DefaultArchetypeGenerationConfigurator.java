@@ -190,6 +190,10 @@ public class DefaultArchetypeGenerationConfigurator
                 model = model.read( xml );
                 context.put( "model", model );
             }
+            else
+            {
+                context.put( "model", "Hello, World!" );
+            }
             while ( !confirmed )
             {
                 if ( archetypeConfiguration.isConfigured() )
