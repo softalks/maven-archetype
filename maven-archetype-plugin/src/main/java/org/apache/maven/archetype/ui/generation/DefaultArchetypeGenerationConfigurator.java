@@ -19,7 +19,6 @@ package org.apache.maven.archetype.ui.generation;
  * under the License.
  */
 
-import java.io.File;
 import org.apache.maven.archetype.ArchetypeGenerationRequest;
 import org.apache.maven.archetype.common.ArchetypeArtifactManager;
 import org.apache.maven.archetype.common.Constants;
@@ -45,12 +44,14 @@ import org.apache.velocity.runtime.parser.ParseException;
 import org.apache.velocity.runtime.parser.node.ASTReference;
 import org.apache.velocity.runtime.parser.node.SimpleNode;
 import org.apache.velocity.runtime.visitor.BaseVisitor;
+import org.apache.velocity.tools.generic.XmlTool;
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.components.interactivity.PrompterException;
 import org.codehaus.plexus.logging.AbstractLogEnabled;
 import org.codehaus.plexus.util.StringUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -182,12 +183,12 @@ public class DefaultArchetypeGenerationConfigurator
             context.put( Constants.GROUP_ID, ad.getGroupId() );
             context.put( Constants.ARTIFACT_ID, ad.getArtifactId() );
             context.put( Constants.VERSION, ad.getVersion() );
-            System.out.println("User directory: " + System.getProperty("user.dir"));
-            File xml = new File("org.apache.maven-archetype-plugin.input.xml");
-            if (xml.exists()) {
+            File xml = new File( "org.apache.maven-archetype-plugin.input.xml" );
+            if ( xml.exists( ) ) 
+            {
                 XmlTool model = new XmlTool();
-                model = model.read(xml);
-                context.put("model", model);
+                model = model.read( xml );
+                context.put( "model", model );
             }
             while ( !confirmed )
             {
