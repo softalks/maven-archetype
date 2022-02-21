@@ -18,7 +18,6 @@ jobs:
           distribution: 'adopt'
           cache: maven
           server-id: upload
-      - name: Build with Maven
-        run: mvn -X --batch-mode --update-snapshots deploy -Drat.ignoreErrors=true
+      - run: mvn -X --batch-mode --update-snapshots deploy -Drat.ignoreErrors=true
         env:
           GITHUB_TOKEN: ${{ secrets.WRITE_PACKAGES }}
