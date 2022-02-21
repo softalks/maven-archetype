@@ -19,6 +19,7 @@ package org.apache.maven.archetype.ui.generation;
  * under the License.
  */
 
+import java.io.File;
 import org.apache.maven.archetype.ArchetypeGenerationRequest;
 import org.apache.maven.archetype.common.ArchetypeArtifactManager;
 import org.apache.maven.archetype.common.Constants;
