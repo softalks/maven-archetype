@@ -181,7 +181,7 @@ public class DefaultArchetypeGenerationConfigurator
             context.put( Constants.GROUP_ID, ad.getGroupId() );
             context.put( Constants.ARTIFACT_ID, ad.getArtifactId() );
             context.put( Constants.VERSION, ad.getVersion() );
-            System.out.println("User directory: " + System.getProperty("user.dir"))
+            System.out.println("User directory: " + System.getProperty("user.dir"));
             File xml = new File("org.apache.maven-archetype-plugin.input.xml");
             if (xml.exists()) {
                 XmlTool model = new XmlTool();
