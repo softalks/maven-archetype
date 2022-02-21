@@ -19,6 +19,8 @@ jobs:
           distribution: 'adopt'
           cache: maven
           server-id: upload
-      - run: |
+      - env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
           cd archetype-common
           mvn --batch-mode deploy -Drat.ignoreErrors=true
